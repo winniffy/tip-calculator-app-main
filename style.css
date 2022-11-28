@@ -57,7 +57,7 @@ input {
 
 .dollar-icon {
     position: absolute;
-    margin: .35em 0 0 .5em
+    margin: .7em 0 0 .5em
 }
 
 .attribution { font-size: 11px; text-align: center; color: var(--dark-gray-cyan); }
