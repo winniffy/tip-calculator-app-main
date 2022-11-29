@@ -21,41 +21,67 @@
 
     <section class="calculator_container">
 
+      <!-- first container -->
       <div class="first_container">
-        <p class="bill_text">Bill</p>
+
+        <!-- bill -->
+        <h2 class="input_header bill_text">Bill</h2>
         <span class="bill
         _container">
           <img src="./images/icon-dollar.svg" alt="dollar-icon" class="dollar-icon">
           <input type="number" name="bill" id="bill" placeholder="0">
         </span>
         
+        <!-- select tip -->
+        <h2 class="input_header">Select Tip %</h2>
+        <div class="select_grid-container">
+          <div class="select_grid-box box5">5%</div>
+          <div class="select_grid-box box10">10%</div>
+          <div class="select_grid-box box15">15%</div>
+          <div class="select_grid-box box25">25%</div>
+          <div class="select_grid-box box50">50%</div>
+          <div class="select_grid-box custom">Custom</div>
+        </div>
+        
+        <!-- number of people -->
+        <h2 class="input_header number_of_people">Number of People</h2>
+          <span class="bill
+          _container">
+            <img src="./images/icon-person.svg" alt="dollar-icon" class="dollar-icon">
+            <input type="number" name="bill" id="bill" placeholder="0">
+          </span>
+
       </div>
-      
+
+      <!-- second container -->
+      <div class="second_container">
+
+        <div class="flex-container">
+          <div class="tip_amount-left">
+            <p class="thead">Tip Amount</p>
+            <p class="tsub">/ person</p>
+          </div>
+          <p class="tip_amount">$0.00</p>
+        </div>
+        <div class="flex-container">
+          <div class="tip_amount-left">
+            <p class="thead">Total</p>
+            <p class="tsub">/ person</p>
+          </div>
+          <p class="total_amount">$0.00</p>
+        </div>
+        <button class="reset">RESET</button>
+      </div>
+
     </section>
 
 
   </main>
-  Bill
-  5%
-  10%
-  15%
-  25%
-  50%
-  Custom
 
-  Number of People
-
-  Tip Amount
-  / person
-
-  Total
-  / person
-
-  Reset
   
-  <div class="attribution">
+  <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
-  </div>
+  </div> -->
 </body>
 </html>

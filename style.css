@@ -19,6 +19,9 @@ body {
     background-color: var(--light-gray-cyan);
 }
 
+.attribution { font-size: 11px; text-align: center; color: var(--dark-gray-cyan); }
+.attribution a { color: var(--gray-cyan); }
+
 input {
     font-family: inherit;
     width: 100%;
@@ -30,12 +33,16 @@ input {
     color: var(--very-dark-cyan);
     font-size: 1.125rem;
     font-weight: 700;
+    margin-bottom: 1.25em;
+}
+
+input:focus {
+    outline-color: var(--strong-cyan);
 }
 
 .main_container {
     width: 100vw;
     height: 100vh;
-    border: 1px solid red;
 }
 
 .logo_container {
@@ -55,10 +62,106 @@ input {
     background-color: var(--white);
 }
 
+.input_header {
+    color: var(--dark-gray-cyan);
+    font-weight: 700;
+    margin-bottom: .4em;
+    font-size: 1rem;
+}
+
 .dollar-icon {
     position: absolute;
     margin: .7em 0 0 .5em
 }
 
-.attribution { font-size: 11px; text-align: center; color: var(--dark-gray-cyan); }
-.attribution a { color: var(--gray-cyan); }
+.select_grid-container {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    grid-template-areas:
+    'a b'
+    'c d'
+    'e f';
+    gap: .75em;
+    margin-bottom: 1.25em;
+}
+
+.box5 {grid-area: a;}
+.box10 {grid-area: b;}
+.box15 {grid-area: c;}
+.box25 {grid-area: d;}
+.box50 {grid-area: e;}
+
+.select_grid-box {
+    background-color: var(--very-dark-cyan);
+    border-radius: 5px;
+    color: var(--white);
+    text-align: center;
+    padding: .5em 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.custom {
+    grid-area: f;
+    text-align: right;
+    padding-right: .65em;
+    color: var(--gray-cyan);
+    background-color: var(--very-light-gray-cyan);
+    letter-spacing: .2em;
+}
+
+.second_container {
+    background-color: var(--very-dark-cyan);
+    border-radius: 15px;
+    padding: 1.25em;
+    padding-top: 2.25em;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5em;
+}
+
+.thead {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.tip_amount {
+    color: var(--strong-cyan);
+    font-size: 1.85rem;
+    font-weight: 700;
+}
+
+.total_amount {
+    color: var(--strong-cyan);
+    font-size: 1.85rem;
+    font-weight: 700;
+}
+
+.tsub {
+    color: var(--gray-cyan);
+    font-size: .85rem;
+    font-weight: 700;
+    margin-top: .2em;
+}
+
+.total-container {
+    display: flex;
+}
+
+.reset {
+    background-color: var(--strong-cyan);
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: .5em 0;
+    font: inherit;
+    color: var(--very-dark-cyan);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
