@@ -19,6 +19,8 @@ body {
     background-color: var(--light-gray-cyan);
 }
 
+img {max-width: 100%;}
+
 .attribution { font-size: 11px; text-align: center; color: var(--dark-gray-cyan); }
 .attribution a { color: var(--gray-cyan); }
 
@@ -69,6 +71,11 @@ input:focus {
     font-size: 1rem;
 }
 
+.number_of_people,
+.select_tip {
+    margin-top: .5em;
+}
+
 .dollar-icon {
     position: absolute;
     margin: .7em 0 0 .5em
@@ -84,6 +91,7 @@ input:focus {
     'e f';
     gap: .75em;
     margin-bottom: 1.25em;
+    cursor: pointer;
 }
 
 .box5 {grid-area: a;}
@@ -108,7 +116,7 @@ input:focus {
     padding-right: .65em;
     color: var(--gray-cyan);
     background-color: var(--very-light-gray-cyan);
-    letter-spacing: .2em;
+    letter-spacing: .15em;
 }
 
 .second_container {
@@ -165,3 +173,51 @@ input:focus {
     font-weight: 700;
     font-size: 1.125rem;
 }
+
+
+@media (min-width: 375px) {
+
+    .main_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2em;
+    }
+
+    .logo_container {
+        width: 50%;
+    }
+
+    .calculator_container {
+        display: flex;
+        width: 50%;
+        border-radius: 20px;
+        margin-top: 0;
+        justify-content: space-between;
+        gap: 2.5em;
+    }
+    
+    .first_container {
+        width: 50%;
+        padding-top: 1em;
+        padding-left: 1em;
+    }
+
+    .second_container {
+        width: 50%;
+        padding: 2em;
+        padding-top: 3em;
+    }
+
+    .select_grid-container {
+        grid-template-areas:
+        'a b c'
+        'd e f';
+    }
+
+    .reset {
+        margin-top: 4.5em;
+    }
+}
+
