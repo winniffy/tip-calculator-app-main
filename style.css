@@ -28,7 +28,7 @@ input {
     font-family: inherit;
     width: 100%;
     background-color: var(--very-light-gray-cyan);
-    padding: .5em .65em;
+    padding: .5em;
     border-radius: 5px;
     border: none;
     text-align: right;
@@ -41,6 +41,16 @@ input {
 input:focus {
     outline-color: var(--strong-cyan);
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 
 .main_container {
     width: 100vw;
@@ -113,10 +123,15 @@ input:focus {
 .custom {
     grid-area: f;
     text-align: right;
-    padding-right: .65em;
+    padding: .5em;
     color: var(--gray-cyan);
     background-color: var(--very-light-gray-cyan);
     letter-spacing: .15em;
+    margin: 0;
+}
+
+.custom::-webkit-input-placeholder {
+    text-align: center;
 }
 
 .second_container {
@@ -176,6 +191,10 @@ input:focus {
 
 
 @media (min-width: 375px) {
+
+    .custom::placeholder {
+        font-size: 1rem;
+    }
 
     .main_container {
         display: flex;
