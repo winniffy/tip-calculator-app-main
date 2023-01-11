@@ -190,7 +190,7 @@ input[type="number"] {
 }
 
 
-@media (min-width: 375px) {
+@media (min-width: 374px) {
 
     .custom::placeholder {
         font-size: 1rem;
