@@ -86,6 +86,29 @@ input[type="number"] {
     margin-top: .5em;
 }
 
+.bill-container,
+.number_of_people-container {
+    position: relative;
+}
+
+.error-bill {
+    position: absolute;
+    right: 0;
+    margin-top: -1.5em;
+    font-size: .875rem;
+    color: red;
+    display: none;
+}
+
+.error-people {
+    position: absolute;
+    right: 0;
+    margin-top: -1.5em;
+    font-size: .875rem;
+    color: red;
+    display: none;
+}
+
 .dollar-icon {
     position: absolute;
     margin: .7em 0 0 .5em
@@ -118,6 +141,11 @@ input[type="number"] {
     padding: .5em 0;
     font-size: 1.125rem;
     font-weight: 700;
+}
+
+.select_grid-box.active {
+    color: var(--very-dark-cyan);
+    background-color: var(--strong-cyan);
 }
 
 .custom {
@@ -187,6 +215,7 @@ input[type="number"] {
     color: var(--very-dark-cyan);
     font-weight: 700;
     font-size: 1.125rem;
+    cursor: pointer;
 }
 
 

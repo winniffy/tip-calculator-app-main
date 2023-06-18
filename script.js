@@ -1,60 +1,96 @@
 'use strict'
 
 const tipButtons = document.querySelectorAll('.select_grid-box');
-const bill = document.getElementById('bill');
-const numOfPeople = document.getElementById('numberOfPeople');
+let bill = document.getElementById('bill');
+let numOfPeople = document.getElementById('numberOfPeople');
 const custom = document.querySelector('.custom');
+const errorBill = document.querySelector('.error-bill');
+const errorPeople = document.querySelector('.error-people');
+const resetButton = document.querySelector('.reset');
 
 const tipAmount = document.querySelector('.tip_amount');
 const totalAmount = document.querySelector('.total_amount');
 
-
+// check buttons
 tipButtons.forEach(tipButton => {
-    tipButton.addEventListener('click', (e) => {
-        const billAmount = parseFloat(bill.value);
-        const numberOfPeople = parseFloat(numOfPeople.value);
-        const customTip = parseFloat(custom.value);
+    tipButton.addEventListener('click', checkTipButton);
+});
 
-        const billPerPerson = billAmount / numberOfPeople;
+// custom input
+custom.addEventListener('input', calcInput);
 
-        // 5% tip
-        if(e.target.innerText === "5%") {
-            tipAmount.innerHTML = `$${((billAmount * 0.05) / numberOfPeople).toFixed(2)}`;
-            totalAmount.innerHTML = `$${(billPerPerson + ((billAmount * 0.05) / numberOfPeople)).toFixed(2)}`;
-        } else
+// reset
+resetButton.addEventListener('click', reset);
 
-        // 10% tip
-        if(e.target.innerText === "10%") {
-            tipAmount.innerHTML = `$${((billAmount * 0.1) / numberOfPeople).toFixed(2)}`;
-            totalAmount.innerHTML = `$${(billPerPerson + ((billAmount * 0.1) / numberOfPeople)).toFixed(2)}`; 
-        } else
+// convert input to number
+const billAmount = parseFloat(bill.value);
+const numberOfPeople = parseFloat(numOfPeople.value);
+const customTip = parseFloat(custom.value);
 
-        // 15% tip
-        if(e.target.innerText === "15%") {
-            tipAmount.innerHTML = `$${((billAmount * 0.15) / numberOfPeople).toFixed(2)}`; 
-            totalAmount.innerHTML = `$${(billPerPerson + ((billAmount * 0.15) / numberOfPeople)).toFixed(2)}`;
-        } else
+// bill per person
+const billPerPerson = billAmount / numberOfPeople;
 
-        // 25% tip
-        if(e.target.innerText === "25%") {
-            tipAmount.innerHTML = `$${((billAmount * 0.25) / numberOfPeople).toFixed(2)}`; 
-            totalAmount.innerHTML = `$${(billPerPerson + ((billAmount * 0.25) / numberOfPeople)).toFixed(2)}`;
-        } else
+// global variable
+let tip = 0;
+bill = 0;
+numOfPeople = 1;
 
-        // 50% tip
-        if(e.target.innerText === "50%") {
-            tipAmount.innerHTML = `$${((billAmount * 0.5) / numberOfPeople).toFixed(2)}`; 
-            totalAmount.innerHTML = `$${(billPerPerson + ((billAmount * 0.5) / numberOfPeople)).toFixed(2)}`;
-        } else
+function calcInput(){
+    // get tip value
+    tip = billAmount * parseFloat(custom.value) / 100;
+    
+    tipButtons.forEach(function(tipButton){
+        tipButton.classList.remove("active");
+    });
 
-        // custom input
-        if(e.target.value === "") {
-            console.log('custom')
+    calculateTipAndTotal();
+}
 
-            tipAmount.innerHTML = `$${((billAmount * customTip) / numberOfPeople).toFixed(2)}`;
-            totalAmount.innerHTML = `$${(billPerPerson + ((billAmount * customTip) / numberOfPeople)).toFixed(2)}`;
-        } 
+// check buttons to check tip
+function checkTipButton(e) {
 
-        // error message when input is empty
+    tipButtons.forEach(function(tipButton){
+        //remove active class from current button
+        tipButton.classList.remove("active")
 
-})});
+        if(e.target.innerHTML === tipButton.innerHTML) {
+            // add active class to currently selected button
+            tipButton.classList.add("active")
+
+            // tip value
+            tip = billAmount * parseFloat(tipButton.innerHTML) / 100;
+
+            console.log(tipButton.innerHTML);
+            
+        }      
+    });
+    // calculate tip
+    calculateTipAndTotal();
+}
+
+// function to calculate tip
+function calculateTipAndTotal(){
+    if(numberOfPeople >= 1) {
+
+        let totalAmt = billPerPerson + (tip / numberOfPeople);
+        let tipAmt = tip / numberOfPeople;
+
+        // calculate tip amount per person
+        tipAmount.innerHTML = '$' + tipAmt.toFixed(2);
+
+        // calculate total amount per person
+        totalAmount.innerHTML = '$' + totalAmt.toFixed(2);
+    }
+}
+
+// reset function
+function reset(){
+    tipAmount.innerHTML = '$0.00';
+    totalAmount.innerHTML = '$0.00';
+    bill.innerHTML = '';
+    numOfPeople.innerHTML = '';
+    
+    tipButtons.forEach(function(tipButton){
+        tipButton.classList.remove("active");
+    });
+}
