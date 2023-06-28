@@ -1,96 +1,102 @@
 'use strict'
 
-const tipButtons = document.querySelectorAll('.select_grid-box');
-let bill = document.getElementById('bill');
-let numOfPeople = document.getElementById('numberOfPeople');
-const custom = document.querySelector('.custom');
-const errorBill = document.querySelector('.error-bill');
-const errorPeople = document.querySelector('.error-people');
-const resetButton = document.querySelector('.reset');
-
+const bill = document.getElementById('bill');
+const people = document.getElementById('numberOfPeople');
+const tips = document.querySelectorAll('.select_grid-box');
 const tipAmount = document.querySelector('.tip_amount');
 const totalAmount = document.querySelector('.total_amount');
+const tipCustom = document.querySelector('.custom');
+const resetButton = document.querySelector('.reset');
+const errorBill = document.querySelector('.error-bill');
+const errorPeople = document.querySelector('.error-people');
 
-// check buttons
-tipButtons.forEach(tipButton => {
-    tipButton.addEventListener('click', checkTipButton);
+
+bill.addEventListener('input', billInputFun);
+people.addEventListener('input', peopleInputFun);
+
+// check which tip is active
+tips.forEach(function(tip) {
+    tip.addEventListener('click', handleClick)
 });
 
-// custom input
-custom.addEventListener('input', calcInput);
+// custom tip
+tipCustom.addEventListener('input', tipInputFun);
 
-// reset
-resetButton.addEventListener('click', reset);
+// reset button
+resetButton.addEventListener('click', resetFun);
 
-// convert input to number
-const billAmount = parseFloat(bill.value);
-const numberOfPeople = parseFloat(numOfPeople.value);
-const customTip = parseFloat(custom.value);
 
-// bill per person
-const billPerPerson = billAmount / numberOfPeople;
+bill.value = '0';
+people.value = '1';
+tipAmount.innerHTML = '$' + (0.0).toFixed(2);
+totalAmount.innerHTML = '$' + (0.0).toFixed(2);
 
-// global variable
-let tip = 0;
-bill = 0;
-numOfPeople = 1;
+let billValue = 0;
+let peopleValue = 1;
+let tipValue = 0.15;
 
-function calcInput(){
-    // get tip value
-    tip = billAmount * parseFloat(custom.value) / 100;
+// bill input function
+function billInputFun() {
+    billValue = parseFloat(bill.value);
+    calculateTip();
+
     
-    tipButtons.forEach(function(tipButton){
-        tipButton.classList.remove("active");
-    });
-
-    calculateTipAndTotal();
 }
 
-// check buttons to check tip
-function checkTipButton(e) {
+// people input function
+function peopleInputFun() {
+    peopleValue = parseFloat(people.value);
 
-    tipButtons.forEach(function(tipButton){
-        //remove active class from current button
-        tipButton.classList.remove("active")
-
-        if(e.target.innerHTML === tipButton.innerHTML) {
-            // add active class to currently selected button
-            tipButton.classList.add("active")
-
-            // tip value
-            tip = billAmount * parseFloat(tipButton.innerHTML) / 100;
-
-            console.log(tipButton.innerHTML);
-            
-        }      
-    });
-    // calculate tip
-    calculateTipAndTotal();
+    if (peopleValue < 1) {
+        errorPeople.style.display = 'block';
+        people.style.border = '2px solid red';
+    } else {
+        errorPeople.style.display = 'none';
+        people.style.border = 'none';
+        calculateTip();
+    }
 }
 
-// function to calculate tip
-function calculateTipAndTotal(){
-    if(numberOfPeople >= 1) {
+// custom input function
+function tipInputFun() {
+    tipValue = parseFloat(tipCustom.value / 100);
 
-        let totalAmt = billPerPerson + (tip / numberOfPeople);
-        let tipAmt = tip / numberOfPeople;
+    tips.forEach(function(tip) {
+        tip.classList.remove("active")
+    });
+    calculateTip();
+}
 
-        // calculate tip amount per person
+// tips click handler
+function handleClick(e) {
+    tips.forEach(function(tip) {
+        tip.classList.remove("active")
+        if (e.target.innerHTML == tip.innerHTML) {
+            tip.classList.add("active");
+            tipValue = parseFloat(tip.innerHTML) / 100;
+        }
+    });
+    calculateTip();
+}
+
+// calculate tip
+function calculateTip() {
+    if(peopleValue >= 1) {
+        let tipAmt = (billValue * tipValue) / peopleValue;
+        let totalAmt = (billValue + tipAmt) / peopleValue;
         tipAmount.innerHTML = '$' + tipAmt.toFixed(2);
-
-        // calculate total amount per person
         totalAmount.innerHTML = '$' + totalAmt.toFixed(2);
     }
 }
 
-// reset function
-function reset(){
-    tipAmount.innerHTML = '$0.00';
-    totalAmount.innerHTML = '$0.00';
-    bill.innerHTML = '';
-    numOfPeople.innerHTML = '';
-    
-    tipButtons.forEach(function(tipButton){
-        tipButton.classList.remove("active");
-    });
+// reset button function
+function resetFun(){
+
+    bill.value = '0';
+    billInputFun();
+    people.value = '1';
+    peopleInputFun();
+    tipCustom.value = '';
 }
+
+
